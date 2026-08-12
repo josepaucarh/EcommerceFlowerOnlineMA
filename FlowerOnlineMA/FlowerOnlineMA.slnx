@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="FlowerOnlineMA/FlowerOnlineMA_WEB.csproj" Id="0a68aa00-8b09-47a1-83ef-91a3beddb5ac" />
+  <Project Path="FlowerOnlineMA_BLL/FlowerOnlineMA_BLL.csproj" Id="a1ff9c84-39a1-41ce-bf53-fe02611099bc" />
+  <Project Path="FlowerOnlineMA_DAL/FlowerOnlineMA_DAL.csproj" Id="dd8b7e72-a27a-4ed5-8a0a-87fad77d517a" />
+  <Project Path="FlowerOnlineMA_ENTITIES/FlowerOnlineMA_ENTITIES.csproj" Id="31103f4d-0a9d-41ba-8ff5-e359dea8a2e9" />
+</Solution>
