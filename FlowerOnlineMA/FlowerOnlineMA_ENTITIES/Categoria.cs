@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace FlowerOnlineMA_ENTITIES
 {
-    public class Class1
+    public class Categoria
     {
+        public int IdCategoria { get; set; }
+        public string Nombre { get; set; }
+        public bool Estado { get; set; }
     }
 }

@@ -83,6 +83,7 @@ go
 
  --Listar Productos Activos
  CREATE PROCEDURE sp_ListarProductos
+    @Nombre VARCHAR(100) = ''
  AS
  BEGIN
     SELECT
@@ -96,7 +97,7 @@ go
         c.Nombre as nombreCategoria
     FROM Productos p
     INNER JOIN Categorias c ON p.IdCategoria = c.IdCategoria
-    WHERE p.Estado = 1;
+    WHERE p.Estado = 1 AND p.Nombre LIKE '%' + @Nombre + '%';
  END
  GO
 
