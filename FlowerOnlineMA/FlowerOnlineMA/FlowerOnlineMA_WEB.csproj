@@ -178,11 +178,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Productos\" />
+    <Folder Include="Uploads\Productos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -210,6 +211,16 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlowerOnlineMA_BLL\FlowerOnlineMA_BLL.csproj">
+      <Project>{a1ff9c84-39a1-41ce-bf53-fe02611099bc}</Project>
+      <Name>FlowerOnlineMA_BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlowerOnlineMA_ENTITIES\FlowerOnlineMA_ENTITIES.csproj">
+      <Project>{31103F4D-0A9D-41BA-8FF5-E359DEA8A2E9}</Project>
+      <Name>FlowerOnlineMA_ENTITIES</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

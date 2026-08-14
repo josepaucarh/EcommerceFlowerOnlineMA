@@ -15,7 +15,7 @@ namespace FlowerOnlineMA_DAL
         {
             List<Categoria> listaCategorias = new List<Categoria>();
             using (SqlConnection cn = Conexion.ObtenerConexion())
-            using (SqlCommand cmd = new SqlCommand("SELECT IdCategoria, Nombre, Estado FROM CATEGORIA", cn))
+            using (SqlCommand cmd = new SqlCommand("SELECT IdCategoria, Nombre, Estado FROM Categorias", cn))
             {
                 cmd.CommandType = CommandType.Text;
                 cn.Open();
