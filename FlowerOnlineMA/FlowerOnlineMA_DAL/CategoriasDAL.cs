@@ -42,7 +42,7 @@ namespace FlowerOnlineMA_DAL
             mensaje = string.Empty;
 
 
-            string query = "INSERT INTO Categoria (Nombre,Estado) VALUES (@Nombre, @Estado)";
+            string query = "INSERT INTO Categorias (Nombre,Estado) VALUES (@Nombre, @Estado)";
             try
             {
                 using (SqlConnection cn = Conexion.ObtenerConexion())
@@ -68,7 +68,7 @@ namespace FlowerOnlineMA_DAL
             bool respuesta = false;
             mensaje = string.Empty;
 
-            string query = "UPDATE Categoria SET Nombre=@Nombre, Estado=@Estado WHERE IdCategoria=@IdCategoria";
+            string query = "UPDATE Categorias SET Nombre=@Nombre, Estado=@Estado WHERE IdCategoria=@IdCategoria";
 
             try
             {
@@ -97,7 +97,7 @@ namespace FlowerOnlineMA_DAL
             bool respuesta = false;
             mensaje = string.Empty;
 
-            string query = "DELETE FROM Categoria WHERE IdCategoria=@IdCategoria";
+            string query = "DELETE FROM Categorias WHERE IdCategoria=@IdCategoria";
             
             try
             {

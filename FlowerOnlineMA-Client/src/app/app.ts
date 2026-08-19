@@ -1,12 +1,12 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component} from '@angular/core';
+import { AdminProductosComponent } from './components/admin-productos/admin-productos';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  standalone: true,
+  imports: [AdminProductosComponent],
+  template: `<app-admin-productos></app-admin-productos>`,
 })
 export class App {
-  protected readonly title = signal('FlowerOnlineMA-Client');
+  title = 'FlowerOnlineMA-Client';
 }

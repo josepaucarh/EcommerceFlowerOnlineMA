@@ -13,26 +13,22 @@ namespace FlowerOnlineMA.Controllers
     {
         private readonly CategoriasBLL categoriasBll = new CategoriasBLL();
         private readonly ProductosBLL productosBll = new ProductosBLL();
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         //Devuelve los productos en Json para llenar DataTables
         public JsonResult ListarProductos()
         {
             var lista = productosBll.Listar();
-            return Json(new { data= lista}, JsonRequestBehavior.AllowGet);
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
         //Devuelve las categorias para llenar el Modal
         public JsonResult ListarCategorias()
         {
             var lista = categoriasBll.Listar();
-            return Json(new { data = lista }, JsonRequestBehavior.AllowGet);
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
-        //Crea o Edita manejando la subida de imagen
+        //Guarda o Edita manejando la subida de imagen
         [HttpPost]
         public JsonResult GuardarProducto(Producto producto, HttpPostedFileBase imagenFile)
         {
@@ -76,7 +72,7 @@ namespace FlowerOnlineMA.Controllers
                 mensaje = "Error en el servidor: " + ex.Message;
             }
 
-            return Json(new { resultado= resultado, mensaje=mensaje}, JsonRequestBehavior.AllowGet);
+            return Json(new { resultado= resultado, mensaje=mensaje});
         }
 
         [HttpPost]
@@ -85,7 +81,7 @@ namespace FlowerOnlineMA.Controllers
             string mensaje = string.Empty;
             bool resultado = productosBll.Eliminar(IdProducto, out mensaje);
 
-            return Json(new { resultado = resultado, mensaje=mensaje}, JsonRequestBehavior.AllowGet);
+            return Json(new { resultado = resultado, mensaje=mensaje});
         }
 
     }

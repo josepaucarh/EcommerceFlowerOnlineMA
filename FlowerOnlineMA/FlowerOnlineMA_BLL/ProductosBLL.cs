@@ -86,7 +86,7 @@ namespace FlowerOnlineMA_BLL
 
             if (producto.Stock < 0)
             {
-                mensaje = "El s tock no puede ser un número negativo.";
+                mensaje = "El stock no puede ser un número negativo.";
                 return false;
             }
 
