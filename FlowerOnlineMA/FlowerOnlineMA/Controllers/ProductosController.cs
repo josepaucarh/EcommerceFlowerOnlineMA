@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 
 namespace FlowerOnlineMA.Controllers
@@ -19,6 +20,14 @@ namespace FlowerOnlineMA.Controllers
         {
             var lista = productosBll.Listar();
             return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+
+        //GET: ListarActivos
+        [HttpGet]
+        public JsonResult ListarActivos()
+        {
+                var listaActivos = productosBll.Listar();
+                return Json(listaActivos, JsonRequestBehavior.AllowGet);
         }
 
         //Devuelve las categorias para llenar el Modal
