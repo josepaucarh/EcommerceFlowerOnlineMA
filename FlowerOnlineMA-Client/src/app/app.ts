@@ -1,11 +1,12 @@
 import { Component} from '@angular/core';
-import { AdminProductosComponent } from './components/admin-productos/admin-productos';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [AdminProductosComponent],
-  template: `<app-admin-productos></app-admin-productos>`,
+  imports: [RouterOutlet],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
 })
 export class App {
   title = 'FlowerOnlineMA-Client';

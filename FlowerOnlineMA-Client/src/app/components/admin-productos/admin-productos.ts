@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductoService } from '../../services/producto.service';
-import { Producto, Categoria } from '../../models/producto';
+import { Producto, Categoria } from '../../models/producto.model';
 
 
 @Component({

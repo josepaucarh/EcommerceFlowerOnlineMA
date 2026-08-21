@@ -2,3 +2,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* styles.css */
+body {
+  background-color: #F8F6F0;
+  color: #1A1C19;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Tarjeta con efecto de cristal esmerilado */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Sombra suave con tinte verde para tarjetas de productos */
+.ambient-shadow {
+  box-shadow: 0 10px 30px -5px rgba(23, 67, 40, 0.06);
+}
+
+.ambient-shadow-hover {
+  transition: all 0.3s ease;
+}
+
+.ambient-shadow-hover:hover {
+  box-shadow: 0 20px 40px -5px rgba(23, 67, 40, 0.12);
+  transform: translateY(-4px);
+}

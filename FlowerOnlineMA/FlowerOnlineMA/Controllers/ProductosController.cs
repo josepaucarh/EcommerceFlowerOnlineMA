@@ -1,11 +1,13 @@
 ﻿using FlowerOnlineMA_BLL;
 using FlowerOnlineMA_ENTITIES;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
-using System.Web.Http.Results;
 using System.Web.Mvc;
 
 namespace FlowerOnlineMA.Controllers
@@ -15,45 +17,54 @@ namespace FlowerOnlineMA.Controllers
         private readonly CategoriasBLL categoriasBll = new CategoriasBLL();
         private readonly ProductosBLL productosBll = new ProductosBLL();
 
-        //Devuelve los productos en Json para llenar DataTables
-        public JsonResult ListarProductos()
+        // Helper para responder siempre en camelCase
+        private ContentResult JsonCamelCase(object data)
+        {
+            var settings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+            string json = JsonConvert.SerializeObject(data, settings);
+            return Content(json, "application/json", Encoding.UTF8);
+        }
+
+        // Devuelve los productos en Json para llenar DataTables / Angular
+        public ActionResult ListarProductos()
         {
             var lista = productosBll.Listar();
-            return Json(lista, JsonRequestBehavior.AllowGet);
+            return JsonCamelCase(lista);
         }
 
-        //GET: ListarActivos
+        // GET: ListarActivos
         [HttpGet]
-        public JsonResult ListarActivos()
+        public ActionResult ListarActivos()
         {
-                var listaActivos = productosBll.Listar();
-                return Json(listaActivos, JsonRequestBehavior.AllowGet);
+            var listaActivos = productosBll.Listar();
+            return JsonCamelCase(listaActivos);
         }
 
-        //Devuelve las categorias para llenar el Modal
-        public JsonResult ListarCategorias()
+        // Devuelve las categorias para llenar el Modal
+        public ActionResult ListarCategorias()
         {
             var lista = categoriasBll.Listar();
-            return Json(lista, JsonRequestBehavior.AllowGet);
+            return JsonCamelCase(lista);
         }
 
-        //Guarda o Edita manejando la subida de imagen
+        // Guarda o Edita manejando la subida de imagen
         [HttpPost]
-        public JsonResult GuardarProducto(Producto producto, HttpPostedFileBase imagenFile)
+        public ActionResult GuardarProducto(Producto producto, HttpPostedFileBase imagenFile)
         {
             bool resultado = false;
             string mensaje = string.Empty;
 
             try
             {
-                //Procesar la imagen si el usuario subió un nuevo archivo
                 if (imagenFile != null && imagenFile.ContentLength > 0)
                 {
                     string extension = Path.GetExtension(imagenFile.FileName);
                     string nombreImagen = Guid.NewGuid().ToString() + extension;
                     string carpetaDestino = Server.MapPath("~/Uploads/Productos/");
-                    
-                    //Crear la carpeta si no existe
+
                     if (!Directory.Exists(carpetaDestino))
                     {
                         Directory.CreateDirectory(carpetaDestino);
@@ -65,15 +76,14 @@ namespace FlowerOnlineMA.Controllers
                     producto.RutaImagen = "/Uploads/Productos/" + nombreImagen;
                 }
 
-                //Si es un producto nuevo
                 if (producto.IdProducto == 0)
                 {
                     resultado = productosBll.Insertar(producto, out mensaje);
                 }
-                else {
+                else
+                {
                     resultado = productosBll.Editar(producto, out mensaje);
                 }
-
             }
             catch (Exception ex)
             {
@@ -81,17 +91,16 @@ namespace FlowerOnlineMA.Controllers
                 mensaje = "Error en el servidor: " + ex.Message;
             }
 
-            return Json(new { resultado= resultado, mensaje=mensaje});
+            return JsonCamelCase(new { resultado = resultado, mensaje = mensaje });
         }
 
         [HttpPost]
-        public JsonResult EliminarProducto(int IdProducto)
+        public ActionResult EliminarProducto(int IdProducto)
         {
             string mensaje = string.Empty;
             bool resultado = productosBll.Eliminar(IdProducto, out mensaje);
 
-            return Json(new { resultado = resultado, mensaje=mensaje});
+            return JsonCamelCase(new { resultado = resultado, mensaje = mensaje });
         }
-
     }
 }
