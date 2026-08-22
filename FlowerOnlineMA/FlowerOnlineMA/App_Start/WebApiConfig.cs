@@ -19,6 +19,9 @@ namespace FlowerOnlineMA.App_Start
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            //Elimina el formateador XML para que solo devuelva JSON
+            config.Formatters.Remove(config.Formatters.XmlFormatter); 
+
             //Cambia de Pascalcase a Camelcase todas las respuestas JSON automaticamente
             var jsonFormatter = config.Formatters.JsonFormatter;
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

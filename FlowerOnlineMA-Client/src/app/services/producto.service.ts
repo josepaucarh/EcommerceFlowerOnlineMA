@@ -8,12 +8,12 @@ import { Producto, RespuestaAPI } from '../models/producto.model';
 })
 export class ProductoService {
   // Ajusta el puerto según tu API C#
-  private apiUrl = 'https://localhost:44368/Productos'; 
+  private apiUrl = 'https://localhost:44368/api/productos'; 
 
   constructor(private http: HttpClient) { }
 
   listProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(`${this.apiUrl}/ListarProductos`);
+    return this.http.get<Producto[]>(`${this.apiUrl}/listar`);
   }
 
   guardarProducto(producto: Producto, imagenFile?: File): Observable<RespuestaAPI> {
@@ -29,10 +29,10 @@ export class ProductoService {
       formData.append('imagenFile', imagenFile);
     }
 
-    return this.http.post<RespuestaAPI>(`${this.apiUrl}/GuardarProducto`, formData);
+    return this.http.post<RespuestaAPI>(`${this.apiUrl}/guardar`, formData);
   }
 
   eliminarProducto(idProducto: number): Observable<RespuestaAPI> {
-    return this.http.post<RespuestaAPI>(`${this.apiUrl}/EliminarProducto`, { IdProducto: idProducto });
+    return this.http.post<RespuestaAPI>(`${this.apiUrl}/eliminar`, { idProducto });
   }
 }

@@ -2,7 +2,9 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductoService } from '../../services/producto.service';
-import { Producto, Categoria } from '../../models/producto.model';
+import { CategoriaService } from '../../services/categoria.service';
+import { Producto} from '../../models/producto.model';
+import { Categoria } from '../../models/categoria.model';
 
 
 @Component({
@@ -29,6 +31,7 @@ export class AdminProductosComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private productoService: ProductoService,
+    private categoriaService: CategoriaService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -53,18 +56,8 @@ export class AdminProductosComponent implements OnInit {
   // Consume el servicio HTTP para traer la lista desde C#
   cargarProductos(): void {
     this.productoService.listProductos().subscribe({
-    next: (data: any[]) => {
-      this.productos = data.map(item => ({
-        idProducto: item.IdProducto ?? item.idProducto,
-        nombre: item.Nombre ?? item.nombre,
-        descripcion: item.Descripcion ?? item.descripcion,
-        precio: item.Precio ?? item.precio,
-        stock: item.Stock ?? item.stock,
-        idCategoria: item.IdCategoria ?? item.idCategoria,
-        nombreCategoria: item.NombreCategoria ?? item.nombreCategoria,
-        rutaImagen: item.RutaImagen ?? item.rutaImagen
-      }));
-
+    next: (data) => {
+      this.productos = data;
       this.cdr.detectChanges();
     },
       error: (err) => console.error('Error al listar productos:', err)
@@ -72,13 +65,13 @@ export class AdminProductosComponent implements OnInit {
   }
 
   cargarCategorias(): void {
-    // Categorías base para vincular con las flores
-    this.categorias = [
-      { idCategoria: 1, nombre: 'Ramos y Bouquets', estado: true },
-      { idCategoria: 2, nombre: 'Cajas de Flores', estado: true },
-      { idCategoria: 3, nombre: 'Plantas y Orquídeas', estado: true },
-      { idCategoria: 4, nombre: 'Packs Especiales', estado: true }
-    ];
+    this.categoriaService.listCategorias().subscribe({
+      next: (data) => {
+        this.categorias= data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Error al cargar categorias:', err)
+    });
   }
 
   // Prepara el modal para REGISTRAR

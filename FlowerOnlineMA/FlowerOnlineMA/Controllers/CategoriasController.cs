@@ -14,8 +14,9 @@ namespace FlowerOnlineMA.Controllers
     {
         private readonly CategoriasBLL categoriasBll = new CategoriasBLL();
 
+        //GET: api/categorias/Listar
         [HttpGet]
-        [Route("Listar")]
+        [Route("listar")]
         public IHttpActionResult Listar()
         {
             try
@@ -28,5 +29,37 @@ namespace FlowerOnlineMA.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        //POST: api/categorias/Agregar
+        [HttpPost]
+        [Route("insertar")]
+        public IHttpActionResult Insertar([FromBody] Categoria categoria)
+        {
+            string mensaje = string.Empty;
+            bool respuesta = categoriasBll.Insertar(categoria, out mensaje);
+            return Ok(new { resultado = respuesta, mensaje = mensaje });
+        }
+
+        //POST: api/categorias/editar
+        [HttpPost]
+        [Route("editar")]
+        public IHttpActionResult Editar([FromBody] Categoria categoria)
+        {
+            string mensaje = string.Empty;
+            bool respuesta = categoriasBll.Editar(categoria, out mensaje);
+            return Ok(new { resultado = respuesta, mensaje = mensaje});
+        }
+
+        //POST: api/categorias/eliminar
+        [HttpPost]
+        [Route("eliminar")]
+        public IHttpActionResult Eliminar([FromBody] Categoria categoria)
+        {
+            string mensaje = string.Empty;
+            bool respuesta = categoriasBll.Eliminar(categoria.IdCategoria, out mensaje);
+            return Ok(new {resultado = respuesta, mensaje = mensaje });
+        }
+
+
     }
 }

@@ -1,106 +1,140 @@
 ﻿using FlowerOnlineMA_BLL;
 using FlowerOnlineMA_ENTITIES;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
 using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.Mvc;
+
 
 namespace FlowerOnlineMA.Controllers
 {
-    public class ProductosController : Controller
+    [RoutePrefix("api/productos")]
+    public class ProductosController : ApiController
     {
-        private readonly CategoriasBLL categoriasBll = new CategoriasBLL();
         private readonly ProductosBLL productosBll = new ProductosBLL();
 
-        // Helper para responder siempre en camelCase
-        private ContentResult JsonCamelCase(object data)
-        {
-            var settings = new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            };
-            string json = JsonConvert.SerializeObject(data, settings);
-            return Content(json, "application/json", Encoding.UTF8);
-        }
-
-        // Devuelve los productos en Json para llenar DataTables / Angular
-        public ActionResult ListarProductos()
-        {
-            var lista = productosBll.Listar();
-            return JsonCamelCase(lista);
-        }
-
-        // GET: ListarActivos
+        // GET: Listar los productos
         [HttpGet]
-        public ActionResult ListarActivos()
+        [Route("listar")]
+        public IHttpActionResult Listar()
         {
-            var listaActivos = productosBll.Listar();
-            return JsonCamelCase(listaActivos);
+            try
+            {
+                var lista = productosBll.Listar();
+                return Ok(lista);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
-        // Devuelve las categorias para llenar el Modal
-        public ActionResult ListarCategorias()
+        //GET: listar productos activos
+        [HttpGet]
+        [Route("listaractivos")]
+        public IHttpActionResult ListaActivo()
         {
-            var lista = categoriasBll.Listar();
-            return JsonCamelCase(lista);
+            try
+            {
+                var listaActivos = productosBll.Listar();
+                return Ok(listaActivos);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
+
 
         // Guarda o Edita manejando la subida de imagen
         [HttpPost]
-        public ActionResult GuardarProducto(Producto producto, HttpPostedFileBase imagenFile)
+        [Route("guardar")]
+        public async Task<IHttpActionResult> GuardarProducto()
         {
-            bool resultado = false;
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return BadRequest("Formato de petición no soportado. Se esperaba multipart/form-data.");
+            }
+
             string mensaje = string.Empty;
+            bool resultado = false;
 
             try
             {
-                if (imagenFile != null && imagenFile.ContentLength > 0)
+                string root = HttpContext.Current.Server.MapPath("~/Uploads/Productos/");
+
+                if (!Directory.Exists(root))
                 {
-                    string extension = Path.GetExtension(imagenFile.FileName);
-                    string nombreImagen = Guid.NewGuid().ToString() + extension;
-                    string carpetaDestino = Server.MapPath("~/Uploads/Productos/");
+                    Directory.CreateDirectory(root);
+                }
 
-                    if (!Directory.Exists(carpetaDestino))
-                    {
-                        Directory.CreateDirectory(carpetaDestino);
-                    }
+                var provider = new MultipartFormDataStreamProvider(root);
+                await Request.Content.ReadAsMultipartAsync(provider);
 
-                    string rutaCompleta = Path.Combine(carpetaDestino, nombreImagen);
-                    imagenFile.SaveAs(rutaCompleta);
+                //Instancia del objeto Producto desde los datos del FormData
+                Producto producto = new Producto
+                {
+                    IdProducto = Convert.ToInt32(provider.FormData["IdProducto"] ?? "0"),
+                    Nombre = provider.FormData["Nombre"],
+                    Descripcion = provider.FormData["Descripcion"],
+                    Precio = Convert.ToDecimal(provider.FormData["Precio"] ?? "0"),
+                    Stock = Convert.ToInt32(provider.FormData["Stock"] ?? "0"),
+                    IdCategoria = Convert.ToInt32(provider.FormData["IdCategoria"] ?? "0")
+                };
 
-                    producto.RutaImagen = "/Uploads/Productos/" + nombreImagen;
+                //Procesar la imagen enviada
+                if (provider.FileData.Count > 0)
+                {
+                    var fileData = provider.FileData[0];
+                    string originalFileName = fileData.Headers.ContentDisposition.FileName.Trim('"');
+                    string extension = Path.GetExtension(originalFileName);
+                    string nuevoNombre = Guid.NewGuid().ToString() + extension;
+                    string rutaFinal = Path.Combine(root, nuevoNombre);
+
+                    File.Move(fileData.LocalFileName, rutaFinal);
+                    producto.RutaImagen = "/Uploads/Productos/" + nuevoNombre;
                 }
 
                 if (producto.IdProducto == 0)
                 {
                     resultado = productosBll.Insertar(producto, out mensaje);
                 }
-                else
-                {
+                else {
                     resultado = productosBll.Editar(producto, out mensaje);
                 }
+
+                return Ok(new {resultado = resultado, mensaje = mensaje });
             }
             catch (Exception ex)
             {
-                resultado = false;
-                mensaje = "Error en el servidor: " + ex.Message;
+                return Ok(new {resultado = false, mensaje="Error en el servidor: " + ex.Message });
             }
 
-            return JsonCamelCase(new { resultado = resultado, mensaje = mensaje });
+            
         }
 
+        //Eliminar Productos
         [HttpPost]
-        public ActionResult EliminarProducto(int IdProducto)
+        [Route("eliminar")]
+        public IHttpActionResult EliminarProducto([FromBody] Producto request)
         {
-            string mensaje = string.Empty;
-            bool resultado = productosBll.Eliminar(IdProducto, out mensaje);
-
-            return JsonCamelCase(new { resultado = resultado, mensaje = mensaje });
+            try
+            {
+                string mensaje = string.Empty;
+                bool resultado = productosBll.Eliminar(request.IdProducto, out mensaje);
+                return Ok(new { resultado = resultado, mensaje = mensaje });
+            }
+            catch (Exception ex) 
+            {
+                return InternalServerError(ex);
+            }
         }
+
     }
 }

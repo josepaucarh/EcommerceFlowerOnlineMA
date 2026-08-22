@@ -62,22 +62,22 @@ go
  );
  go
 
- insert into Categorias (Nombre) values
- ('Ramos de Rosas'), 
- ('Arreglos en Caja'), 
- ('Plantas y Orquídeas'), 
- ('Packs Especiales');
+ INSERT INTO Categorias (Nombre) VALUES 
+ ('Plantas de Interior'),
+ ('Plantas de Exterior');
+ GO
 
- insert into Usuarios (Nombre, Apellido, Correo, Clave, EsAdmin) values
+ INSERT INTO Usuarios (Nombre, Apellido, Correo, Clave, EsAdmin) VALUES
  ('Admin', 'Floreria', 'admin@floreria.com', '123456', 1),
  ('Jose', 'Paucar', 'josepaucar.hi@gmail.com', '123456', 0);
 
- insert into Productos (Nombre, Descripcion, Precio, Stock, RutaImagen, IdCategoria) values
- ('Ramo Bouquet 12 Rosas Rojas', 'Hermoso bouquet de 12 rosas rojas seleccionadas con envoltorio fino.', 89.90, 20, '/Uploads/Productos/ramo-rosas.jpg', 1),
- ('Caja Premium Tulipanes Primavera', 'Caja cilíndrica de lujo con 10 tulipanes de colores variados.', 120.00, 15, '/Uploads/Productos/caja-tulipanes.jpg', 2),
- ('Orquídea Phalaenopsis Blanca', 'Planta de orquídea blanca de dos varas en maceta de cerámica.', 145.00, 10, '/Uploads/Productos/orquidea.jpg', 3),
- ('Pack Amor Infinito', 'Ramo de 6 rosas rojas + Peluche de oso mediano + Globo Feliz Día.', 110.00, 12, '/Uploads/Productos/pack-amor.jpg', 4);
- go
+ INSERT INTO Productos (Nombre, Descripcion, Precio, Stock, RutaImagen, IdCategoria) VALUES 
+ ('Costilla de Adán', 'Monstera deliciosa de hojas verdes caladas, ideal para espacios iluminados sin sol directo.', 45.00, 15, '/Uploads/Productos/costilla-adan.jpg', 1),
+ ('Croton', 'Planta ornamental de interior con hojas de colores vivos amarillos, rojos y verdes.', 35.00, 10, '/Uploads/Productos/croton.jpg', 1),
+ ('Oreja de Elefante', 'Alocasia de follaje amplio y elegante, perfecta para decorar ambientes interiores.', 50.00, 8, '/Uploads/Productos/oreja-elefante.jpg', 1),
+ ('Ciprés Limón', 'Arbusto cónico de exterior con aroma a cítrico, perfecto para jardines a pleno sol.', 40.00, 12, '/Uploads/Productos/cipres-limon.jpg', 2),
+ ('Floripondio', 'Arbusto de exterior con vistosas flores en forma de trompeta y fragancia nocturna.', 38.00, 6, '/Uploads/Productos/floripondio.jpg', 2);
+ GO
 
  --Procedimientos Almacenados
 
