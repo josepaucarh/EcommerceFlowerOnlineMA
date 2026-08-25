@@ -1,0 +1,42 @@
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md bg-surface dark:bg-surface-container shadow-sm dark:shadow-none transition-transform duration-150">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4 bg-[#F9F8F3] text-[#191C1A] font-sans">
+    
+    <!-- Logo y Botón Menú Móvil -->
+    <div class="flex items-center gap-2">
+      <button class="text-secondary dark:text-secondary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 p-2 md:hidden" id="menu-btn">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+      </button>
+      
+      <a routerLink="/" class="flex items-center gap-2 font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed cursor-pointer">
+        <div>
+          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">eco</span>
+        </div>
+        
+        <div class="flex flex-col">
+          <span class="font-black text-xl tracking-tight text-[#002B18] leading-none">Verde Moy</span>
+          <span class="text-[10px] font-bold text-[#1C6C3B] tracking-widest uppercase mt-0.5">Florería Boutique</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Acciones / Iconos -->
+    <div class="flex items-center gap-xs text-on-surface-variant dark:text-surface-variant font-label-md text-label-md">
+      <!-- Buscador -->
+      <button class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 p-2">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0; font-weight: 300;">search</span>
+      </button>
+      
+      <!-- Mi Perfil -->
+      <a routerLink="/perfil" class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 p-2">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0; font-weight: 300;">person</span>
+      </a>
+      
+      <!-- Carrito / Checkout -->
+      <a routerLink="/checkout" class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 p-2 relative">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0; font-weight: 300;">shopping_cart</span>
+        <span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+      </a>
+    </div>
+
+  </div>
+</header>

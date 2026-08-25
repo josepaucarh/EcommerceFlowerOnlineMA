@@ -46,9 +46,16 @@ export class Catalogo implements OnInit{
     if(!ruta || ruta.includes('placeholder')){
       return this.defaultImageSvg;
     }
-    if (ruta.startsWith('http://') || ruta.startsWith('https://')){
+    //Si la ruta apunta a nuestro assets local
+    if (ruta.startsWith('assets/')) {
       return ruta;
     }
+
+    //Si la ruta ya es una URL absoluta
+    if (ruta.startsWith('http://') || ruta.startsWith('https://')) {
+      return ruta;
+    }
+
     const cleanRuta = ruta.startsWith('/')? ruta: `/${ruta}`;
     return `${this.backendUrl}${cleanRuta}`;
   }

@@ -10,6 +10,13 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+/* Header Navbar con efecto de cristal */
+.glass-header {
+  background: rgba(248, 246, 240, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 /* Tarjeta con efecto de cristal esmerilado */
 .glass-card {
   background: rgba(255, 255, 255, 0.85);
@@ -30,4 +37,14 @@ body {
 .ambient-shadow-hover:hover {
   box-shadow: 0 20px 40px -5px rgba(23, 67, 40, 0.12);
   transform: translateY(-4px);
+}
+
+/* Utilidades para el manejo de estilos a los iconos */
+@layer utilities {
+  .icon-fill {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .icon-outline {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
 }
