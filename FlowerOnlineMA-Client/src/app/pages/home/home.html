@@ -1,1 +1,128 @@
-<p>home works!</p>
+<!-- Hero Section -->
+<section class="relative w-full h-[700px] flex items-end pb-12 px-6 md:px-12">
+  <div class="absolute inset-0 z-0">
+    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgWBUATq4RlPPiRFHAYaKZjI1hpOtj-rCV_9E2YBcDNm4P-YGzUpv4udxKJ13ZHOI2FWnYEju8pUov4OdX24kH4HBOGd8ZXbGdQCpyH-bJopDO4rwBiWFKxPK780VSVg9h5X96PYXLjVh3SqT5mXu2nJJ26qCG3tw0gejmE-miHGJk4o56v_12pD_CG2jj2BOl69Z9SeDnr86eiafRJyXMm5mWs71Omym3-bK7N7RB3l_nKeoD23cagw" alt="Fondo Hero">
+    <div class="absolute inset-0 bg-gradient-to-t from-[#003822]/90 via-[#003822]/40 to-transparent"></div>
+  </div>
+  <div class="relative z-10 max-w-7xl mx-auto w-full flex flex-col gap-4 text-white">
+    <h1 class="text-4xl md:text-6xl font-bold max-w-2xl leading-tight">
+      Transforma tus espacios con la frescura del verde
+    </h1>
+    <p class="text-sm md:text-base max-w-xl text-white/90">
+      Descubre nuestra selección exclusiva de plantas y decoración para convertir tu hogar en un oasis natural.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3 pt-2 w-full sm:w-auto">
+      <a routerLink="/catalogo" class="bg-[#157e4e] text-white px-8 py-3.5 rounded-full text-sm font-semibold hover:bg-[#157e4e]/80 transition-colors shadow-lg text-center">
+        Ver Catálogo
+      </a>
+      <a routerLink="/catalogo" class="border border-white/60 text-white hover:bg-white/10 px-8 py-3.5 rounded-full text-sm backdrop-blur-sm transition-all text-center">
+        Ver Recomendadas
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Beneficios -->
+<section class="py-12 px-6 max-w-7xl mx-auto">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-start gap-2">
+      <div class="w-10 h-10 rounded-full bg-[#157e4e]/10 text-[#157e4e] flex items-center justify-center mb-1">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+      </div>
+      <h3 class="font-bold text-gray-900 text-sm">Envíos directos a Lima Sur</h3>
+      <p class="text-xs text-gray-500">Rápidos y seguros</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-start gap-2">
+      <div class="w-10 h-10 rounded-full bg-[#157e4e]/10 text-[#157e4e] flex items-center justify-center mb-1">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">support_agent</span>
+      </div>
+      <h3 class="font-bold text-gray-900 text-sm">Asesoría de cuidado gratuita</h3>
+      <p class="text-xs text-gray-500">Expertos a tu servicio</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-start gap-2">
+      <div class="w-10 h-10 rounded-full bg-[#157e4e]/10 text-[#157e4e] flex items-center justify-center mb-1">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified</span>
+      </div>
+      <h3 class="font-bold text-gray-900 text-sm">Plantas 100% sanas</h3>
+      <p class="text-xs text-gray-500">Calidad garantizada</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-start gap-2">
+      <div class="w-10 h-10 rounded-full bg-[#157e4e]/10 text-[#157e4e] flex items-center justify-center mb-1">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">design_services</span>
+      </div>
+      <h3 class="font-bold text-gray-900 text-sm">Macetas de diseño</h3>
+      <p class="text-xs text-gray-500">Estilo único</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Colecciones / Bento Grid -->
+<section class="py-8 px-6 max-w-7xl mx-auto">
+  <div class="flex justify-between items-end mb-6">
+    <h2 class="text-2xl font-bold text-[#003822]">Colecciones</h2>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-[600px] md:h-[400px]">
+    <a routerLink="/catalogo" class="relative group rounded-2xl overflow-hidden shadow-sm col-span-2 row-span-2 md:col-span-2 md:row-span-1 block h-full">
+      <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApw831kN1E5dwAsIQixWbhH9Cljkb7wXZjNeyL07Jx-8OOL0G-UGP7cMe1ZD2RNvW7KT7hRxXvBbaeqt7VKVU00SX-uMANYQj9MUgA_EKNgCWf6KtpqotVBs9_1H94Qt8dMYs6W85R6U1wdddnHOe2GQkMiB6xKl5Y-laMtZ88-K43DsCA6LXygr8jdlHRR5Mz-3ZetxzlIp1bwElltwv9xIbzuLVgUwO1DmYFwIa9Bjska_-lb4-ulQ" alt="Plantas de Interior">
+      <div class="absolute inset-0 bg-gradient-to-t from-[#003822]/80 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+      <div class="absolute bottom-0 left-0 p-6 flex flex-col gap-1">
+        <span class="text-xs bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full w-max">Plantas de Interior</span>
+        <h3 class="text-xl font-bold text-white">Renueva tu interior</h3>
+      </div>
+    </a>
+    <a routerLink="/catalogo" class="relative group rounded-2xl overflow-hidden shadow-sm block h-full min-h-[150px]">
+      <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNvgoKdCY4x4FQYSfnJyvtTgeJBjm1nqBXNAG3A6M4o6t6S38M0H7ud-PozXHvkLMr9kkZ5QXlBTaGzBIPxZWKchR3-NfqXO-sF2YeJQpMdJITz-ubkfXWwRc8nkgSKi66C_7sbVLOnml-BNHltyj1SPEaCcW7AYGF07E9WNHWvflImhq8OVudZolFWnfPWtNOWLNhxjVfT7rqWfZyKV_oNW_jlfk8p-5p7PJDlLYHkRo6KwH9Va_9PA" alt="Exterior y Terraza">
+      <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
+      <div class="absolute inset-0 flex items-center justify-center p-4 text-center">
+        <span class="text-sm font-bold text-white drop-shadow-md">Exterior y Terraza</span>
+      </div>
+    </a>
+    <a routerLink="/catalogo" class="relative group rounded-2xl overflow-hidden shadow-sm block h-full min-h-[150px]">
+      <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKHDiczbAjr49AVEoj--T8nmxzQjDGm9J6-MwJHOnAaZE6oLuH1ztjRye3g4icS_fK0WYs2gjz20y7-1KnxELDdVhAq2hhxpVDWQNeFLgpm8z1W6tbAc6OXs8WWNjVGevwGZf4uEsZ9U-1L_cmyrE-2kpR_ng8hlZoRwFH7uk_Cb3RliXw7laboyQgnV3_J0Cmnuaj4wfnmK3koQUjSfVvpJxbF2V5jrHe5iBWvb_L57-0epKegoR8nQ" alt="Suculentas y Cactus">
+      <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
+      <div class="absolute inset-0 flex items-center justify-center p-4 text-center">
+        <span class="text-sm font-bold text-white drop-shadow-md">Suculentas y Cactus</span>
+      </div>
+    </a>
+    <a routerLink="/catalogo" class="relative group rounded-2xl overflow-hidden shadow-sm col-span-2 md:col-span-1 block h-full min-h-[150px] bg-gray-100 border border-gray-200">
+      <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center gap-2">
+        <span class="material-symbols-outlined text-[#157e4e] text-4xl">shopping_basket</span>
+        <span class="text-sm font-bold text-[#003822]">Macetas y Accesorios</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Productos Destacados (Comentado temporalmente hasta tener el componente app-producto-card listo) -->
+<section class="py-8 px-6 max-w-7xl mx-auto mb-12">
+  <h2 class="text-2xl font-bold text-[#003822] mb-6">Novedades y Favoritos</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+    <!-- <app-producto-card *ngFor="let prod of productos" [producto]="prod"></app-producto-card> -->
+  </div>
+</section>
+
+
+<!-- Banner Sobre Nosotros -->
+<section class="bg-[#003822] text-white py-12 px-6 my-8">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8">
+    <div class="flex-1 flex flex-col gap-4 text-center md:text-left">
+      <h2 class="text-3xl md:text-5xl font-bold">Pasión por la botánica</h2>
+      <p class="text-sm md:text-base text-white/80 max-w-lg mx-auto md:mx-0 leading-relaxed">
+        Seleccionamos cuidadosamente cada planta para asegurar su calidad y belleza. Te acompañamos con asesoría profesional para que tu oasis verde florezca todo el año.
+      </p>
+      <div>
+        <a routerLink="/perfil" class="inline-block border border-white text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-white hover:text-[#003822] transition-colors">
+          Conoce nuestra historia
+        </a>
+      </div>
+    </div>
+    <div class="flex-1 w-full relative h-[250px] md:h-[350px] rounded-2xl overflow-hidden">
+      <img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyrXrAdnWwFm_D_4bsk9jePmSdsCOB-M-EbWkX8B3mSKc8ZKr9wxsDriPd__tDCEs9bLufCi9_EvER0DYJ0eVFrYP-ra2RZfv0OT2RA6_Tbp7wJfgHtuIPLFXEEycZ3JVTJTHxFwT8F8eINDAS8dS3cbveagG52MGwBsfYkUqNaIOt24dsxj1zaMM0NgP6R52bpYKSLtQmRrZRygVmcstQw5z4LCzN8LNVeyb6erQ8wRmNUmaBGhxUPg" alt="Manos cuidando planta">
+    </div>
+  </div>
+</section>
