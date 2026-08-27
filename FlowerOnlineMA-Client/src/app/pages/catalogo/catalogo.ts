@@ -6,11 +6,17 @@ import { CategoriaService } from '../../services/categoria.service';
 import { Producto } from '../../models/producto.model';
 import { Categoria } from '../../models/categoria.model';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { ProductoCard } from '../../components/producto-card/producto-card';
 
 @Component({
   selector: 'app-catalogo',
   standalone:true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ProductoCard
+  ],
   templateUrl: './catalogo.html',
   styleUrl: './catalogo.css',
 })
