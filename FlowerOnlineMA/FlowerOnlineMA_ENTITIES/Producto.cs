@@ -17,5 +17,8 @@ namespace FlowerOnlineMA_ENTITIES
         public int IdCategoria { get; set; }
         public bool Estado { get; set; }
         public string NombreCategoria { get; set; }
+        public string TipoLuz { get; set; }
+        public string FrecuenciaRiego { get; set; }
+        public string NivelCuidado { get; set; }
     }
 }

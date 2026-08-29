@@ -258,6 +258,7 @@ BEGIN
     BEGIN
         SET @Resultado=0;
         SET @Mensaje='No hay suficiente stock disponible para este producto';
+        RETURN;
     END
 
     --Transaccion 

@@ -44,8 +44,11 @@
   <ItemGroup>
     <Compile Include="CategoriasDAL.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="FavoritosDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProductosDAL.cs" />
+    <Compile Include="UsuariosDAL.cs" />
+    <Compile Include="VentasDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlowerOnlineMA_ENTITIES\FlowerOnlineMA_ENTITIES.csproj">

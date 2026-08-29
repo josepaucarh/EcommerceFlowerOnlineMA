@@ -85,7 +85,10 @@ namespace FlowerOnlineMA.Controllers
                     Descripcion = provider.FormData["Descripcion"],
                     Precio = Convert.ToDecimal(provider.FormData["Precio"] ?? "0"),
                     Stock = Convert.ToInt32(provider.FormData["Stock"] ?? "0"),
-                    IdCategoria = Convert.ToInt32(provider.FormData["IdCategoria"] ?? "0")
+                    IdCategoria = Convert.ToInt32(provider.FormData["IdCategoria"] ?? "0"),
+                    TipoLuz = provider.FormData["TipoLuz"],
+                    FrecuenciaRiego = provider.FormData["FrecuenciaRiego"],
+                    NivelCuidado = provider.FormData["NivelCuidado"]
                 };
 
                 //Procesar la imagen enviada
@@ -99,6 +102,10 @@ namespace FlowerOnlineMA.Controllers
 
                     File.Move(fileData.LocalFileName, rutaFinal);
                     producto.RutaImagen = "/Uploads/Productos/" + nuevoNombre;
+                }
+                else 
+                { 
+                    producto.RutaImagen = provider.FormData["RutaImagen"];
                 }
 
                 if (producto.IdProducto == 0)

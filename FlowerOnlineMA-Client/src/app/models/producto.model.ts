@@ -7,6 +7,9 @@ export interface Producto {
   rutaImagen?: string;
   idCategoria: number;
   nombreCategoria?: string;
+  tipoLuz?: string;
+  frecuenciaRiego?: string;
+  nivelCuidado?: string;
 }
 
 export interface RespuestaAPI {

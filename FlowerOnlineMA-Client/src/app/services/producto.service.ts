@@ -24,7 +24,10 @@ export class ProductoService {
     formData.append('Precio', producto.precio.toString());
     formData.append('Stock', producto.stock.toString());
     formData.append('IdCategoria', producto.idCategoria.toString());
-
+    formData.append('TipoLuz', producto.tipoLuz || '');
+    formData.append('FrecuenciaRiego', producto.frecuenciaRiego || '');
+    formData.append('NivelCuidado', producto.nivelCuidado || '');
+    
     if (imagenFile) {
       formData.append('imagenFile', imagenFile);
     }

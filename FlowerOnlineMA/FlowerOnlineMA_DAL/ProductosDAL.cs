@@ -35,7 +35,10 @@ namespace FlowerOnlineMA_DAL
                             Stock= Convert.ToInt32(dr["Stock"]),
                             RutaImagen = dr["RutaImagen"].ToString(),
                             IdCategoria = Convert.ToInt32(dr["IdCategoria"]),
-                            NombreCategoria = dr["NombreCategoria"].ToString()
+                            NombreCategoria = dr["NombreCategoria"].ToString(),
+                            TipoLuz = dr["TipoLuz"] != DBNull.Value ? dr["TipoLuz"].ToString() : null,
+                            FrecuenciaRiego = dr["FrecuenciaRiego"] != DBNull.Value ? dr["FrecuenciaRiego"].ToString() : null,
+                            NivelCuidado = dr["NivelCuidado"] != DBNull.Value ? dr["NivelCuidado"].ToString() : null
                         });
                     }
                 }
@@ -69,7 +72,10 @@ namespace FlowerOnlineMA_DAL
                             Stock = Convert.ToInt32(dr["Stock"]),
                             RutaImagen = dr["RutaImagen"].ToString(),
                             IdCategoria = Convert.ToInt32(dr["IdCategoria"]),
-                            NombreCategoria = dr["NombreCategoria"].ToString()
+                            NombreCategoria = dr["NombreCategoria"].ToString(),
+                            TipoLuz = dr["TipoLuz"] != DBNull.Value ? dr["TipoLuz"].ToString() : null,
+                            FrecuenciaRiego = dr["FrecuenciaRiego"] != DBNull.Value ? dr["FrecuenciaRiego"].ToString() : null,
+                            NivelCuidado = dr["NivelCuidado"] != DBNull.Value ? dr["NivelCuidado"].ToString() : null
                         };
                     }
                 }
@@ -93,6 +99,9 @@ namespace FlowerOnlineMA_DAL
                 cmd.Parameters.AddWithValue("@Stock", producto.Stock);
                 cmd.Parameters.AddWithValue("@RutaImagen", producto.RutaImagen?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@IdCategoria", producto.IdCategoria);
+                cmd.Parameters.AddWithValue("@TipoLuz", producto.TipoLuz ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@FrecuenciaRiego", producto.FrecuenciaRiego ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@NivelCuidado", producto.NivelCuidado ?? (object)DBNull.Value);
 
                 cmd.Parameters.Add("@Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("@Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
@@ -123,6 +132,9 @@ namespace FlowerOnlineMA_DAL
                 cmd.Parameters.AddWithValue("@Stock", producto.Stock);
                 cmd.Parameters.AddWithValue("@RutaImagen", producto.RutaImagen ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@IdCategoria", producto.IdCategoria);
+                cmd.Parameters.AddWithValue("@TipoLuz", producto.TipoLuz ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@FrecuenciaRiego", producto.FrecuenciaRiego ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@NivelCuidado", producto.NivelCuidado ?? (object)DBNull.Value);
 
                 cmd.Parameters.Add("@Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("@Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
@@ -146,7 +158,6 @@ namespace FlowerOnlineMA_DAL
             using (SqlCommand cmd = new SqlCommand("sp_EliminarProducto", cn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 cmd.Parameters.AddWithValue("@IdProducto", idProducto);
 
                 cmd.Parameters.Add("@Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;

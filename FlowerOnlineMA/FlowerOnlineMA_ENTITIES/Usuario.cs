@@ -16,5 +16,6 @@ namespace FlowerOnlineMA_ENTITIES
         public bool EsAdmin { get; set; }
         public DateTime FechaRegistro { get; set; }
         public bool Estado { get; set; }
+        public string RutaAvatar { get; set; }
     }
 }
