@@ -28,4 +28,14 @@ export class AuthService {
   cerrarSesion(): void {
     localStorage.removeItem('usuario_flower');
   }
+  // Verifica si el usuario ha iniciado sesión
+  estaAutenticado(): boolean {
+    return this.obtenerSesion() !== null;
+  }
+
+  // Retorna directamente la propiedad booleana esAdmin del usuario
+  esAdmin(): boolean {
+    const usuario = this.obtenerSesion();
+    return usuario ? usuario.esAdmin : false;
+  }
 }

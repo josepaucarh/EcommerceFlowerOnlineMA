@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { ProductoCard } from '../../components/producto-card/producto-card';
 import { Producto } from '../../models/producto.model';
 
@@ -54,4 +54,11 @@ export class Home {
       rutaImagen: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD2xb0JY2K4PjDHuRC0EhnDhCUgeSYVbJEi_q5G3vrdjPrKG_sFDh-Rz4d6CGvb20DxVCkv5C3BUIdcD7Qhf-tU7_3XzC4OlarcLng6Q3VpUkTBkd8NAu45kAZi721RD1HIng4Js3TKkgPBUvP3U8QfCP2e_h_HEHnai-ibqH89F0l4ENgKONE9gQZYM5uXVH_Uu0CWqegZd-Z2UX4OOFIQOG3bvNvtbRRAFrado7mIXAUg8doDz4p45g' 
     }
   ];
+
+  constructor(private router: Router) {}
+
+  irADetalle(producto: Producto): void {
+    // Redirige al catálogo o vista de detalle pasando el ID del producto
+    this.router.navigate(['/catalogo'], { queryParams: { productoId: producto.idProducto } });
+  }
 }

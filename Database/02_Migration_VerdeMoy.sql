@@ -42,3 +42,131 @@ BEGIN
     );
 END
 GO
+
+-- 1. Actualizar datos existentes con los nuevos campos de cuidado
+UPDATE Productos SET 
+    TipoLuz = 'Luz Indirecta', 
+    FrecuenciaRiego = 'Semanal', 
+    NivelCuidado = 'Fácil cuidado' 
+WHERE IdCategoria = 1;
+
+UPDATE Productos SET 
+    TipoLuz = 'Sol Directo', 
+    FrecuenciaRiego = 'Cada 3 días', 
+    NivelCuidado = 'Moderado' 
+WHERE IdCategoria = 2;
+GO
+
+-- 2. Modificar sp_ListarProductos para incluir los campos de cuidado
+ALTER PROCEDURE sp_ListarProductos
+    @Nombre VARCHAR(100) = ''
+AS
+BEGIN
+    SELECT
+        p.IdProducto,
+        p.Nombre,
+        p.Descripcion,
+        p.Precio,
+        p.Stock,
+        p.RutaImagen,
+        p.IdCategoria,
+        p.TipoLuz,
+        p.FrecuenciaRiego,
+        p.NivelCuidado,
+        c.Nombre as nombreCategoria
+    FROM Productos p
+    INNER JOIN Categorias c ON p.IdCategoria = c.IdCategoria
+    WHERE p.Estado = 1 AND p.Nombre LIKE '%' + @Nombre + '%';
+END
+GO
+
+-- 3. Modificar sp_ObtenerProductoID para incluir los campos de cuidado
+ALTER PROCEDURE sp_ObtenerProductoID
+    @IdProducto INT
+AS
+BEGIN
+    SELECT
+        p.IdProducto,
+        p.Nombre,
+        p.Descripcion,
+        p.Precio,
+        p.Stock,
+        p.RutaImagen,
+        p.IdCategoria,
+        p.TipoLuz,
+        p.FrecuenciaRiego,
+        p.NivelCuidado,
+        c.Nombre as nombreCategoria
+    FROM Productos p
+    INNER JOIN Categorias c ON p.IdCategoria = c.IdCategoria
+    WHERE p.IdProducto = @IdProducto AND p.Estado = 1;
+END
+GO
+
+-- 4. Modificar sp_InsertarProducto
+ALTER PROCEDURE sp_InsertarProducto
+    @Nombre VARCHAR(100),
+    @Descripcion VARCHAR(500),
+    @Precio DECIMAL(10,2),
+    @Stock INT,
+    @RutaImagen VARCHAR(250),
+    @IdCategoria INT,
+    @TipoLuz VARCHAR(100) = NULL,
+    @FrecuenciaRiego VARCHAR(100) = NULL,
+    @NivelCuidado VARCHAR(50) = NULL,
+    @Resultado BIT OUTPUT,
+    @Mensaje VARCHAR(500) OUTPUT
+AS
+BEGIN
+    SET @Resultado = 1;
+    SET @Mensaje = 'Producto registrado correctamente';
+    
+    BEGIN TRY
+        INSERT INTO Productos(Nombre, Descripcion, Precio, Stock, RutaImagen, IdCategoria, TipoLuz, FrecuenciaRiego, NivelCuidado)
+        VALUES (@Nombre, @Descripcion, @Precio, @Stock, @RutaImagen, @IdCategoria, @TipoLuz, @FrecuenciaRiego, @NivelCuidado);
+    END TRY
+    BEGIN CATCH
+        SET @Resultado = 0;
+        SET @Mensaje = ERROR_MESSAGE();
+    END CATCH
+END
+GO
+
+-- 5. Modificar sp_EditarProducto
+ALTER PROCEDURE sp_EditarProducto
+    @IdProducto INT,
+    @Nombre VARCHAR(100),
+    @Descripcion VARCHAR(500),
+    @Precio DECIMAL(10,2),
+    @Stock INT,
+    @RutaImagen VARCHAR(250),
+    @IdCategoria INT,
+    @TipoLuz VARCHAR(100) = NULL,
+    @FrecuenciaRiego VARCHAR(100) = NULL,
+    @NivelCuidado VARCHAR(50) = NULL,
+    @Resultado BIT OUTPUT,
+    @Mensaje VARCHAR(500) OUTPUT
+AS
+BEGIN
+    SET @Resultado = 1;
+    SET @Mensaje = 'Producto actualizado correctamente';
+
+    BEGIN TRY
+        UPDATE Productos SET
+            Nombre = @Nombre,
+            Descripcion = @Descripcion,
+            Precio = @Precio,
+            Stock = @Stock,
+            RutaImagen = ISNULL(@RutaImagen, RutaImagen),
+            IdCategoria = @IdCategoria,
+            TipoLuz = @TipoLuz,
+            FrecuenciaRiego = @FrecuenciaRiego,
+            NivelCuidado = @NivelCuidado
+        WHERE IdProducto = @IdProducto;
+    END TRY
+    BEGIN CATCH
+        SET @Resultado = 0;
+        SET @Mensaje = ERROR_MESSAGE();
+    END CATCH
+END
+GO

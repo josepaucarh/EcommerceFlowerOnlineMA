@@ -1,41 +1,125 @@
-<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md bg-surface dark:bg-surface-container shadow-sm dark:shadow-none transition-transform duration-150">
-  <div class="w-full max-w-container-max mx-auto h-16 px-gutter sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-    <!-- Logo y Botón Menú Móvil -->
+<!-- TopAppBar (Cabecera Principal) -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#002B18]/80 backdrop-blur-md shadow-sm dark:shadow-none transition-transform duration-150">
+  <div class="flex justify-between items-center w-full px-6 md:px-12 max-w-7xl mx-auto h-16">
+    
+    <!-- Lado Izquierdo: Menú Hamburguesa Móvil + Logo de la Marca -->
     <div class="flex items-center gap-2">
-      <button class="text-secondary dark:text-secondary-fixed hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 p-2 md:hidden" id="menu-btn">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+      <button 
+        (click)="toggleDrawer()" 
+        class="text-[#1C6C3B] dark:text-emerald-400 hover:text-[#002B18] dark:hover:text-white transition-colors p-2 md:hidden" 
+        aria-label="Abrir menú">
+        <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 0;">menu</span>
       </button>
-      
-      <a routerLink="/" class="flex items-center gap-2 font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed cursor-pointer">
-        <div>
-          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">eco</span>
-        </div>
-        
+
+      <a routerLink="/" class="flex items-center gap-2 cursor-pointer group">
+        <span class="material-symbols-outlined notranslate text-[#1C6C3B] text-2xl" translate="no" style="font-variation-settings: 'FILL' 1;">eco</span>
         <div class="flex flex-col">
-          <span class="font-black text-xl tracking-tight text-[#002B18] leading-none">Verde Moy</span>
-          <span class="text-[10px] font-bold text-[#1C6C3B] tracking-widest uppercase mt-0.5">Florería Boutique</span>
+          <span class="font-bold text-lg leading-tight tracking-tight text-[#002B18] dark:text-white group-hover:text-[#1C6C3B] transition-colors">VERDE MOY</span>
+          <span class="text-[9px] font-semibold text-[#1C6C3B] dark:text-emerald-400 tracking-widest uppercase -mt-0.5">Florería Boutique</span>
         </div>
       </a>
     </div>
 
-    <!-- Acciones / Iconos -->
-    <div class="flex items-center gap-xs text-on-surface-variant dark:text-surface-variant font-label-md text-label-md">
+    <!-- Centro: Navegación Principal (Visible solo en Escritorio) -->
+    <nav class="hidden md:flex items-center gap-8 text-xs font-bold text-[#002B18] dark:text-gray-200 uppercase tracking-wider">
+      <a routerLink="/" routerLinkActive="text-[#1C6C3B] dark:text-emerald-400" [routerLinkActiveOptions]="{exact: true}" class="hover:text-[#1C6C3B] dark:hover:text-emerald-400 transition-colors">Inicio</a>
+      <a routerLink="/catalogo" routerLinkActive="text-[#1C6C3B] dark:text-emerald-400" class="hover:text-[#1C6C3B] dark:hover:text-emerald-400 transition-colors">Catálogo</a>
+      <a routerLink="/perfil" routerLinkActive="text-[#1C6C3B] dark:text-emerald-400" class="hover:text-[#1C6C3B] dark:hover:text-emerald-400 transition-colors">Nosotros</a>
+    </nav>
+
+    <!-- Lado Derecho: Iconos de Acción -->
+    <div class="flex items-center gap-1 text-[#002B18] dark:text-gray-200">
+      
       <!-- Buscador -->
-      <button class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 p-2">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0; font-weight: 300;">search</span>
-      </button>
-      
-      <!-- Mi Perfil -->
-      <a routerLink="/perfil" class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 p-2">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0; font-weight: 300;">person</span>
+      <a routerLink="/catalogo" class="hover:text-[#1C6C3B] dark:hover:text-emerald-400 transition-colors p-2 flex items-center justify-center" title="Buscar">
+        <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 0; font-weight: 300;">search</span>
       </a>
-      
-      <!-- Carrito / Checkout -->
-      <a routerLink="/checkout" class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 p-2 relative">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0; font-weight: 300;">shopping_cart</span>
-        <span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+
+      <!-- Panel Admin (Protegido por Angular AuthService) -->
+      <a *ngIf="authService.esAdmin()" 
+         routerLink="/admin" 
+         routerLinkActive="text-[#1C6C3B] dark:text-emerald-400 font-bold"
+         class="hover:text-[#1C6C3B] dark:hover:text-emerald-400 transition-colors p-2 flex items-center justify-center text-[#1C6C3B] dark:text-emerald-400" 
+         title="Panel de Administración">
+        <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 0; font-weight: 300;">admin_panel_settings</span>
+      </a>
+
+      <!-- Perfil / Mi Cuenta -->
+      <a routerLink="/perfil" class="hover:text-[#1C6C3B] dark:hover:text-emerald-400 transition-colors p-2 flex items-center justify-center" title="Mi Cuenta">
+        <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 0; font-weight: 300;">person</span>
+      </a>
+
+      <!-- Carrito de Compras con indicador Stitch -->
+      <a routerLink="/checkout" class="hover:text-[#1C6C3B] dark:hover:text-emerald-400 transition-colors p-2 relative flex items-center justify-center" title="Carrito">
+        <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 0; font-weight: 300;">shopping_cart</span>
+        <span class="absolute top-1 right-1 w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
       </a>
     </div>
 
   </div>
 </header>
+
+<!-- Drawer Overlay (Fondo translúcido al abrir menú móvil) -->
+<div 
+  *ngIf="isDrawerOpen()" 
+  (click)="toggleDrawer()" 
+  class="fixed inset-0 bg-black/40 z-[55] backdrop-blur-sm transition-opacity">
+</div>
+
+<!-- NavigationDrawer (Menú Lateral Móvil) -->
+<aside 
+  [class.translate-x-0]="isDrawerOpen()" 
+  [class.-translate-x-full]="!isDrawerOpen()" 
+  class="fixed inset-y-0 left-0 z-[60] flex flex-col h-full w-80 rounded-r-xl bg-white dark:bg-[#002B18] shadow-xl transition-transform duration-300 ease-in-out border-r border-gray-100 dark:border-white/10">
+  
+  <!-- Cabecera del Menú Lateral -->
+  <div class="p-4 border-b border-gray-100 dark:border-white/10 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined notranslate text-[#1C6C3B]" translate="no" style="font-variation-settings: 'FILL' 1;">eco</span>
+      <span class="font-bold text-lg text-[#002B18] dark:text-white">VERDE MOY</span>
+    </div>
+    <button (click)="toggleDrawer()" class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-all" aria-label="Cerrar menú">
+      <span class="material-symbols-outlined notranslate" translate="no">close</span>
+    </button>
+  </div>
+
+  <!-- Categorías y Enlaces Rápidos del Menú Lateral -->
+  <div class="flex-1 overflow-y-auto py-3 px-2 flex flex-col gap-1">
+    
+    <!-- Enlace destacado -->
+    <a (click)="toggleDrawer()" routerLink="/catalogo" class="bg-[#1C6C3B]/10 text-[#1C6C3B] dark:text-emerald-400 rounded-full px-4 py-3 flex items-center gap-3 text-sm font-medium transition-all">
+      <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 1;">home_work</span>
+      Plantas de Interior
+    </a>
+
+    <!-- Enlaces secundarios -->
+    <a (click)="toggleDrawer()" routerLink="/catalogo" class="text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full px-4 py-3 flex items-center gap-3 text-sm font-medium transition-all">
+      <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 0;">deck</span>
+      Exterior y Terrazas
+    </a>
+    
+    <a (click)="toggleDrawer()" routerLink="/catalogo" class="text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full px-4 py-3 flex items-center gap-3 text-sm font-medium transition-all">
+      <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 0;">potted_plant</span>
+      Suculentas y Cactus
+    </a>
+
+    <a (click)="toggleDrawer()" routerLink="/catalogo" class="text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full px-4 py-3 flex items-center gap-3 text-sm font-medium transition-all">
+      <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 0;">shopping_basket</span>
+      Macetas y Accesorios
+    </a>
+
+    <!-- Separador sutil -->
+    <div class="my-2 border-t border-gray-100 dark:border-white/10"></div>
+
+    <!-- Menú de la aplicación -->
+    <a (click)="toggleDrawer()" routerLink="/" class="text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full px-4 py-3 flex items-center gap-3 text-sm font-medium transition-all">
+      <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 0;">home</span>
+      Inicio
+    </a>
+    
+    <a (click)="toggleDrawer()" routerLink="/perfil" class="text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full px-4 py-3 flex items-center gap-3 text-sm font-medium transition-all">
+      <span class="material-symbols-outlined notranslate" translate="no" style="font-variation-settings: 'FILL' 0;">info</span>
+      Nosotros
+    </a>
+  </div>
+</aside>
